@@ -1,0 +1,92 @@
+
+/* ここから下に記載していく */
+@charset "utfr-8";
+
+
+
+.whole{
+  background: #7494c0;
+  overflow: hidden;
+  max-width: 500px; 
+  max-height: 700px;
+  margin: 20px auto;
+  font-size: 80%;
+    }
+    .wrap{ 
+        width: 1200px;	   /*全体の幅を指定する*/  
+        margin: 0 auto;    /*マージンの指定をする、ブラウザ対策*/
+      }
+
+      .scrol{
+      width:500px;
+      height: 500px;
+      overflow: scroll;
+      overflow: auto;
+      }
+
+      .line__right{
+        margin-top: 30px;
+        margin-bottom: 30px;
+        display:flex;
+        justify-content: flex-start;
+        align-items: flex-start; 
+        justify-content:flex-end;
+      }
+    
+      .says {
+        max-width:auto; 
+        display: flex;
+        flex-wrap: wrap;
+        position: relative;
+        padding: 10px 100px 10px 100px;
+        margin-top: 10px;
+        margin-bottom: 10px;
+        margin-left: auto;
+        margin-right: 50px;
+        border-radius: 12px;
+        background: whitesmoke;
+        box-sizing:border-box;
+        line-height:1.5;
+      }
+
+      .says:after {
+        content: "";
+        position: absolute;
+        border: 10px solid transparent;
+        margin-top:-3px;
+      }
+      .line__right .says:after {
+        right:-30px;
+        border-left: 22px solid whitesmoke;
+      }
+
+      .icon{
+        float: right;
+        margin-top: 10px;
+        margin-bottom: 15px;
+        margin-left: auto;
+        float: right;
+        width: 60px;
+        height: 60px;
+        margin-left: -30px;
+      }
+
+.message{
+  background-color: white;
+  margin-bottom: 30px;
+  
+}
+
+.name{
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-right: 50px;
+  text-align: center;
+}
+
+.tex{
+  padding-top: 10px;
+  padding-bottom: 10px;
+  text-align: center;
+}
+

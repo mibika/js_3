@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<title>Chatアプリ</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- コンテンツ表示画面 -->
+<div class="whole">
+    <div class="message">
+        <div class="name">
+            名前: <input type="text" id="uname">
+        </div>
+        <div class="tex">
+           <textarea name="" id="text" cols="20" rows="1"></textarea>
+           <button id="send">送信</button>
+            <button id="remove">削除</button>
+        </div>
+        </div>
+    <div class="scrol">
+        <div class="line__right">
+            <div class="output"></div>
+            <div class="icon"></div>
+        </div>
+    </div>
+</div>
+
+
+<!--/ コンテンツ表示画面 -->
+
+
+
+<!-- JQuery -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<!-- JQuery -->
+
+<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+
+<!--** 以下Firebase **-->
+
+<script type="module">
+    // Import the functions you need from the SDKs you need
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.8.1/firebase-app.js";
+    // TODO: Add SDKs for Firebase products that you want to use
+    // https://firebase.google.com/docs/web/setup#available-libraries
+    import { getDatabase, ref, push, set, onChildAdded, remove, onChildRemoved }
+        from "https://cdnjs.cloudflare.com/ajax/libs/firebase/9.8.1/firebase-database.min.js";
+
+    // Your web app's Firebase configuration
+    const firebaseConfig = {
+      apiKey: "";
+      authDomain: "fir-demo-c68ee.firebaseapp.com",
+      projectId: "fir-demo-c68ee",
+      storageBucket: "fir-demo-c68ee.appspot.com",
+      messagingSenderId: "487705733383",
+      appId: "1:487705733383:web:1060be29c187cdcee57da2"
+    };
+  
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+
+const db=getDatabase(app);
+const dbref = ref(db, "chat");
+
+
+$("#send").on('click',function(){
+    const msg = {
+        usame: $("#uname").val(),
+        text: $("#text").val()
+    }
+    const newPostRef = push(dbref);
+    set(newPostRef, msg);
+    $(".scrol").animate(
+        { scrollTop: $(".scrol").get(0).scrollHeight },
+    );
+});
+
+onChildAdded(dbref, function(data){
+    const msg = data.val();
+    const key = data.key;
+    const h = `<p id="${key}" class="says">${msg.usame}: ${msg.text}</p>`
+    const c = ` <img src="./imgs/buke.png" alt="" height="44px" width="50px">`
+   $(".output").append(h);
+   $(".icon").append(c);
+});
+
+$("#text").on('keydown', function(e){
+    if(e.keyCode == 13){
+        const msg = {
+        usame: $("#uname").val(),
+        text: $("#text").val()
+    }
+    const newPostRef = push(dbref);
+    set(newPostRef, msg);
+    }
+});
+
+$("#output").on("click",".says", function(){
+    const dlt = $(this).attr('id');
+    remove(ref(db, "chat/" + dlt));
+});
+</script>
+
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
